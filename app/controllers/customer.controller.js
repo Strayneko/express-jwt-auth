@@ -19,6 +19,23 @@ export const listCustomer = (req, res) => {
     });
 };
 
+export const detailCustomer = (req, res) => {
+  Customer.findOne({ where: { id: req.params.customerId } })
+    .then(customer => {
+      if (customer) {
+        res.send({
+          message: "Data successfully fetched!",
+          data: customer,
+        });
+      } else {
+        res.send({ message: "Customer not found!" });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 export const createCustomer = (req, res) => {
   Customer.create({
     name: req.body.name,

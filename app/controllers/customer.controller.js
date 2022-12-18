@@ -5,7 +5,19 @@ import bcrypt from "bcryptjs/dist/bcrypt.js";
 
 const Customer = db.customer;
 
-export const listCustomer = (req, res) => {};
+export const listCustomer = (req, res) => {
+  Customer.findAll()
+    .then(customer => {
+      if (customer.length > 0) {
+        res.send({ message: "Data fetched successfully", data: customer });
+      } else {
+        res.send({ message: "No customer found in database" });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
 
 export const createCustomer = (req, res) => {
   Customer.create({

@@ -10,4 +10,5 @@ export const customerRoutes = app => {
     next();
   });
   app.post("/api/customer/create", controller.createUser);
+  app.delete("/api/customer/destroy", controller.deleteUser);
 };

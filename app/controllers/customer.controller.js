@@ -5,7 +5,9 @@ import bcrypt from "bcryptjs/dist/bcrypt.js";
 
 const Customer = db.customer;
 
-export const createUser = (req, res) => {
+export const listCustomer = (req, res) => {};
+
+export const createCustomer = (req, res) => {
   Customer.create({
     name: req.body.name,
     address: req.body.address,
@@ -13,11 +15,31 @@ export const createUser = (req, res) => {
   })
     .then(customer => {
       res.send({
-        message: "User was registered successfully!",
+        message: "Customer was added successfully!",
         data: customer,
       });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
+};
+
+export const deleteCustomer = (req, res) => {
+  Customer.findOne({ where: { id: req.body.customerId } }).then(customer => {
+    if (customer) {
+      Customer.destroy({ where: { id: req.body.customerId } })
+        .then(customer => {
+          res.send({
+            message: `Customer with id ${req.body.customerId} has been deleted`,
+          });
+        })
+        .catch(err => {
+          res.status(500).send({ message: err.message });
+        });
+    } else {
+      res.send({
+        message: `Customer has not found`,
+      });
+    }
+  });
 };

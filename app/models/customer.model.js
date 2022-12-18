@@ -3,6 +3,7 @@ const CustomerModel = (sequelize, Sequelize) => {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     name: {
       type: Sequelize.STRING,
@@ -14,6 +15,7 @@ const CustomerModel = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
   });
+  return Customer;
 };
 
 export default CustomerModel;

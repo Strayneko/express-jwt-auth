@@ -4,12 +4,13 @@ import db from "./app/models/index.js";
 import cors from "cors";
 import { authRoutes } from "./app/routes/auth.routes.js";
 import { userRoutes } from "./app/routes/user.routes.js";
+import { customerRoutes } from "./app/routes/customer.routes.js";
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 3000;
 
 const corsOptions = {
-  origin: `http://127.0.0.1:${port}`
+  origin: `http://127.0.0.1:${port}`,
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
@@ -17,22 +18,23 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 authRoutes(app);
 userRoutes(app);
+customerRoutes(app);
 
 const Role = db.role;
 const initial = () => {
   Role.create({
     id: 1,
-    name: "user"
+    name: "user",
   });
 
   Role.create({
     id: 2,
-    name: "moderator"
+    name: "moderator",
   });
 
   Role.create({
     id: 3,
-    name: "admin"
+    name: "admin",
   });
 };
 

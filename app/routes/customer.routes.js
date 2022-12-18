@@ -13,4 +13,5 @@ export const customerRoutes = app => {
   app.post("/api/customer/create", controller.createCustomer);
   app.delete("/api/customer/destroy", controller.deleteCustomer);
   app.get("/api/customer/detail/:customerId", controller.detailCustomer);
+  app.put("/api/customer/update/:customerId", controller.updateCustomer);
 };

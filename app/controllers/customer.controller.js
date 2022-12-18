@@ -36,6 +36,25 @@ export const detailCustomer = (req, res) => {
     });
 };
 
+export const updateCustomer = (req, res) => {
+  Customer.findOne({ where: { id: req.params.customerId } })
+    .then(customer => {
+      if (customer) {
+        customer.update({
+          name: req.body.name,
+          address: req.body.customer,
+          gender: req.body.gender,
+        });
+        res.send({ message: "Data successfully updated" });
+      } else {
+        res.send({ message: "Customer not found!" });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
 export const createCustomer = (req, res) => {
   Customer.create({
     name: req.body.name,

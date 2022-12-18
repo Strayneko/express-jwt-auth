@@ -9,9 +9,25 @@ export const customerRoutes = app => {
     );
     next();
   });
-  app.get("/api/customer/all", controller.listCustomer);
-  app.post("/api/customer/create", controller.createCustomer);
-  app.delete("/api/customer/destroy", controller.deleteCustomer);
-  app.get("/api/customer/detail/:customerId", controller.detailCustomer);
-  app.put("/api/customer/update/:customerId", controller.updateCustomer);
+  app.get("/api/customer/all", [authJwt.verifyToken], controller.listCustomer);
+  app.post(
+    "/api/customer/create",
+    [authJwt.verifyToken, authJwt.isModerator],
+    controller.createCustomer
+  );
+  app.delete(
+    "/api/customer/destroy",
+    [authJwt.verifyToken, authJwt.isModerator],
+    controller.deleteCustomer
+  );
+  app.get(
+    "/api/customer/detail/:customerId",
+    [authJwt.verifyToken],
+    controller.detailCustomer
+  );
+  app.put(
+    "/api/customer/update/:customerId",
+    [authJwt.verifyToken, authJwt.isModerator],
+    controller.updateCustomer
+  );
 };

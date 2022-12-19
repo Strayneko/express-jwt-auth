@@ -9,14 +9,14 @@ const verifyToken = (req, res, next) => {
 
   if (!token) {
     return res.status(403).send({
-      message: "No token provided!",
+      message: "No token provided!"
     });
   }
 
   jwt.verify(token, authConfig.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        message: "Unauthorized!",
+        message: "Unauthorized!"
       });
     }
     req.userId = decoded.id;
@@ -42,7 +42,7 @@ const isAdmin = (req, res, next) => {
       }
 
       res.status(403).send({
-        message: "Require Admin role!",
+        message: "Require Admin role!"
       });
 
       return;
@@ -61,7 +61,7 @@ const isModerator = (req, res, next) => {
       }
 
       res.status(403).send({
-        message: "Require Moderator Role!",
+        message: "Require Moderator Role!"
       });
     });
   });
@@ -71,19 +71,13 @@ const isModeratorOrAdmin = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
     user.getRoles().then(roles => {
       for (let role of roles) {
-        if (role === "moderator") {
-          next();
-          return;
-        }
-        if (role === "admin") {
+        if (role.name === "admin" || role.name === "moderator") {
           next();
           return;
         }
       }
-
-      res.status(403).send({
-        message: "Require moderator or admin role!",
-      });
+      res.status(403).send({ message: "Require Moderator or Admin Role!" });
+      return;
     });
   });
 };
@@ -92,6 +86,6 @@ const authJwt = {
   verifyToken,
   isAdmin,
   isModerator,
-  isModeratorOrAdmin,
+  isModeratorOrAdmin
 };
 export default authJwt;

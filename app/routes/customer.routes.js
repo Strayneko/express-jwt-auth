@@ -12,12 +12,12 @@ export const customerRoutes = app => {
   app.get("/api/customer/all", [authJwt.verifyToken], controller.listCustomer);
   app.post(
     "/api/customer/create",
-    [authJwt.verifyToken, authJwt.isModerator],
+    [authJwt.verifyToken, authJwt.isModeratorOrAdmin],
     controller.createCustomer
   );
   app.delete(
     "/api/customer/destroy",
-    [authJwt.verifyToken, authJwt.isModerator],
+    [authJwt.verifyToken, authJwt.isModeratorOrAdmin],
     controller.deleteCustomer
   );
   app.get(
@@ -27,7 +27,7 @@ export const customerRoutes = app => {
   );
   app.put(
     "/api/customer/update/:customerId",
-    [authJwt.verifyToken, authJwt.isModerator],
+    [authJwt.verifyToken, authJwt.isModeratorOrAdmin],
     controller.updateCustomer
   );
 };

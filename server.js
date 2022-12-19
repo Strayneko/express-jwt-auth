@@ -10,7 +10,7 @@ const app = express();
 const port = 3000;
 
 const corsOptions = {
-  origin: `http://127.0.0.1:${port}`,
+  origin: `http://127.0.0.1:${port}`
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
@@ -21,20 +21,21 @@ userRoutes(app);
 customerRoutes(app);
 
 const Role = db.role;
+
 const initial = () => {
   Role.create({
     id: 1,
-    name: "user",
+    name: "user"
   });
 
   Role.create({
     id: 2,
-    name: "moderator",
+    name: "moderator"
   });
 
   Role.create({
     id: 3,
-    name: "admin",
+    name: "admin"
   });
 };
 

@@ -11,20 +11,20 @@ const Op = db.Sequelize.Op;
 export const signup = (req, res) => {
   // sa`ve` user to databse
   if (!req.body.username || !req.body.password || !req.body.email)
-    res.status(403).send({ message: "Please fill all the required parameter" });
+    res.status(400).send({ message: "Please fill all the required parameter" });
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8),
+    password: bcrypt.hashSync(req.body.password, 8)
   })
     .then(user => {
       if (req.body.roles) {
         Role.findAll({
           where: {
             name: {
-              [Op.or]: req.body.roles,
-            },
-          },
+              [Op.or]: req.body.roles
+            }
+          }
         }).then(roles => {
           user.setRoles(roles).then(() => {
             res.send({ message: "User was registered successfully" });
@@ -45,8 +45,8 @@ export const signup = (req, res) => {
 export const signin = (req, res) => {
   User.findOne({
     where: {
-      username: req.body.username,
-    },
+      username: req.body.username
+    }
   })
     .then(user => {
       if (!user) return res.status(404).send({ message: "User not found!" });
@@ -59,12 +59,12 @@ export const signin = (req, res) => {
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
-          message: "Invalid Password!",
+          message: "Invalid Password!"
         });
       }
 
       const token = jwt.sign({ id: user.id }, authConfig.secret, {
-        expiresIn: 86400, // 24hours
+        expiresIn: 86400 // 24hours
       });
 
       const authorities = [];
@@ -77,7 +77,7 @@ export const signin = (req, res) => {
           username: user.username,
           email: user.email,
           roles: authorities,
-          accessToken: token,
+          accessToken: token
         });
       });
     })

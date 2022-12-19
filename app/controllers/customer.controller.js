@@ -25,7 +25,7 @@ export const detailCustomer = (req, res) => {
       if (customer) {
         res.send({
           message: "Data successfully fetched!",
-          data: customer,
+          data: customer
         });
       } else {
         res.send({ message: "Customer not found!" });
@@ -43,7 +43,7 @@ export const updateCustomer = (req, res) => {
         customer.update({
           name: req.body.name,
           address: req.body.customer,
-          gender: req.body.gender,
+          gender: req.body.gender
         });
         res.send({ message: "Data successfully updated" });
       } else {
@@ -56,15 +56,22 @@ export const updateCustomer = (req, res) => {
 };
 
 export const createCustomer = (req, res) => {
+  const gender = ["male", "female"];
+
+  if (!gender.includes(req.body.gender)) {
+    return res.status(400).send({
+      message: "Gender was not found! please choose between male/female!"
+    });
+  }
   Customer.create({
     name: req.body.name,
     address: req.body.address,
-    gender: req.body.gender,
+    gender: req.body.gender
   })
     .then(customer => {
       res.send({
         message: "Customer was added successfully!",
-        data: customer,
+        data: customer
       });
     })
     .catch(err => {
@@ -78,7 +85,7 @@ export const deleteCustomer = (req, res) => {
       Customer.destroy({ where: { id: req.body.customerId } })
         .then(customer => {
           res.send({
-            message: `Customer with id ${req.body.customerId} has been deleted`,
+            message: `Customer with id ${req.body.customerId} has been deleted`
           });
         })
         .catch(err => {
@@ -86,7 +93,7 @@ export const deleteCustomer = (req, res) => {
         });
     } else {
       res.send({
-        message: `Customer has not found`,
+        message: `Customer has not found`
       });
     }
   });

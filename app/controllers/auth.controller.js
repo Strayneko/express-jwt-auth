@@ -9,7 +9,7 @@ const Role = db.role;
 const Op = db.Sequelize.Op;
 
 export const signup = (req, res) => {
-  // sa`ve` user to databse
+  // store user to databse
   if (!req.body.username || !req.body.password || !req.body.email)
     res.status(400).send({ message: "Please fill all the required parameter" });
   User.create({
@@ -43,6 +43,7 @@ export const signup = (req, res) => {
 };
 
 export const signin = (req, res) => {
+  // find one user by username
   User.findOne({
     where: {
       username: req.body.username

@@ -3,12 +3,14 @@ import * as controller from "../controllers/customer.controller.js";
 
 export const customerRoutes = app => {
   app.use((req, res, next) => {
+    // set response header
     res.header(
       "Access-Control-Allow-Headers",
       "x-access-token, Origin, Content-Type, Accept"
     );
     next();
   });
+  // customer routes
   app.get("/api/customer/all", [authJwt.verifyToken], controller.listCustomer);
   app.post(
     "/api/customer/create",

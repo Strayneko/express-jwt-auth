@@ -6,9 +6,11 @@ import { authRoutes } from "./app/routes/auth.routes.js";
 import { userRoutes } from "./app/routes/user.routes.js";
 import { customerRoutes } from "./app/routes/customer.routes.js";
 
+// initialize express
 const app = express();
 const port = 3000;
 
+// initialize and set cors option
 const corsOptions = {
   origin: `http://127.0.0.1:${port}`
 };
@@ -22,6 +24,7 @@ customerRoutes(app);
 
 const Role = db.role;
 
+// seed role table
 const initial = () => {
   Role.create({
     id: 1,
@@ -47,5 +50,7 @@ db.sequelize.sync({ force: true }).then(() => {
 // for production
 // db.sequelize.sync();
 
+// use bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+// start local development server
 app.listen(port, () => console.info(`Server started at ${port}`));

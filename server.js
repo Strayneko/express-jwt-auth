@@ -2,9 +2,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import db from "./app/models/index.js";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
 import { authRoutes } from "./app/routes/auth.routes.js";
 import { userRoutes } from "./app/routes/user.routes.js";
 import { customerRoutes } from "./app/routes/customer.routes.js";
+import swaggerDocument from "./swagger.json" assert{type: 'json'}
+
 
 // initialize express
 const app = express();
@@ -18,6 +21,8 @@ app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
+// swagger ui
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 authRoutes(app);
 userRoutes(app);
 customerRoutes(app);

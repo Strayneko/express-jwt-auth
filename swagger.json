@@ -14,6 +14,7 @@
     "/api/auth/signup": {
       "post": {
         "description": "",
+        "tags": ["authentication"],
         "parameters": [
           {
             "name": "body",
@@ -56,6 +57,7 @@
     "/api/auth/signin": {
       "post": {
         "description": "",
+        "tags": ["authentication"],
         "parameters": [
           {
             "name": "body",
@@ -91,7 +93,9 @@
     },
     "/api/customer/all": {
       "get": {
-        "description": "",
+        "description": "Get all customer",
+        "tags": ["customer"],
+
         "parameters": [
           {
             "name": "x-access-token",
@@ -117,7 +121,8 @@
     },
     "/api/customer/create": {
       "post": {
-        "description": "",
+        "description": "Create new customer",
+        "tags": ["customer"],
         "parameters": [
           {
             "name": "x-access-token",
@@ -164,7 +169,8 @@
     },
     "/api/customer/destroy": {
       "delete": {
-        "description": "",
+        "description": "Delete customer by id",
+        "tags": ["customer"],
         "parameters": [
           {
             "name": "x-access-token",
@@ -205,7 +211,8 @@
     },
     "/api/customer/detail/{customerId}": {
       "get": {
-        "description": "",
+        "description": "Get customer detail",
+        "tags": ["customer"],
         "parameters": [
           {
             "name": "customerId",
@@ -237,7 +244,8 @@
     },
     "/api/customer/update/{customerId}": {
       "put": {
-        "description": "",
+        "description": "Update customer by id",
+        "tags": ["customer"],
         "parameters": [
           {
             "name": "customerId",
@@ -291,6 +299,7 @@
     "/api/test/all": {
       "get": {
         "description": "",
+        "tags": ["test"],
         "parameters": [],
         "responses": {
           "200": {
@@ -302,6 +311,7 @@
     "/api/test/user": {
       "get": {
         "description": "",
+        "tags": ["test"],
         "parameters": [
           {
             "name": "x-access-token",
@@ -325,6 +335,7 @@
     "/api/test/mod": {
       "get": {
         "description": "",
+        "tags": ["test"],
         "parameters": [
           {
             "name": "x-access-token",
@@ -348,6 +359,7 @@
     "/api/test/admin": {
       "get": {
         "description": "",
+        "tags": ["test"],
         "parameters": [
           {
             "name": "x-access-token",

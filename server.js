@@ -33,6 +33,14 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
         url: "http://127.0.0.1:3000/api/docs"
     }
 }))
+app.get('/', (req,res) => {
+  res.send({
+    message: "Welcome to Express API",
+    data: {
+      docs: corsOptions.origin + "/api/docs"
+    }
+  })
+})
 authRoutes(app);
 userRoutes(app);
 customerRoutes(app);

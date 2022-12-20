@@ -31,7 +31,7 @@
                   "example": "any"
                 },
                 "roles": {
-                  "example": "any"
+                  "example": ["user", "admin", "moderator"]
                 }
               }
             }
@@ -131,7 +131,7 @@
               "type": "object",
               "properties": {
                 "gender": {
-                  "example": "any"
+                  "example": "male/female"
                 },
                 "name": {
                   "example": "any"

@@ -6,7 +6,7 @@ import swaggerUi from "swagger-ui-express";
 import { authRoutes } from "./app/routes/auth.routes.js";
 import { userRoutes } from "./app/routes/user.routes.js";
 import { customerRoutes } from "./app/routes/customer.routes.js";
-import swaggerDocument from "./swagger.json" assert{type: 'json'}
+import swaggerDocument from "./swagger.json" assert {type: 'json'}
 
 
 // initialize express
@@ -20,9 +20,19 @@ const corsOptions = {
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-// swagger ui
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+
+// initalize swagger ui 
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+      swaggerOptions: {
+        requestInterceptor:  (request) => {
+            request.headers.Origin = "http://127.0.0.1:3000";
+            return request;
+        },
+        url: "http://127.0.0.1:3000/api/docs"
+    }
+}))
 authRoutes(app);
 userRoutes(app);
 customerRoutes(app);

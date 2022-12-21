@@ -7,6 +7,7 @@ import { authRoutes } from "./app/routes/auth.routes.js";
 import { userRoutes } from "./app/routes/user.routes.js";
 import { customerRoutes } from "./app/routes/customer.routes.js";
 import swaggerDocument from "./swagger.json" assert {type: 'json'}
+import { productRoutes } from "./app/routes/product.routes.js";
 
 
 // initialize express
@@ -44,6 +45,7 @@ app.get('/', (req,res) => {
 authRoutes(app);
 userRoutes(app);
 customerRoutes(app);
+productRoutes(app)
 
 const Role = db.role;
 

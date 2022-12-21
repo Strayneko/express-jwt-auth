@@ -1,19 +1,19 @@
 const CustomerModel = (sequelize, Sequelize) => {
-  const Customer = sequelize.define("customer", {
+  const Customer = sequelize.define("customers", {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
     name: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     address: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING
     },
     gender: {
-      type: Sequelize.STRING,
-    },
+      type: Sequelize.STRING
+    }
   });
   return Customer;
 };
